@@ -31,6 +31,19 @@
           "type": "image/png"
         }
       ]
+    },
+    {
+      "name": "Screenshot",
+      "short_name": "Screenshot",
+      "description": "Lihat screenshot aplikasi",
+      "url": "/#/screenshots",
+      "icons": [
+        {
+          "src": "/images/screenshot-desktop.png",
+          "sizes": "1280x720",
+          "type": "image/png"
+        }
+      ]
     }
   ],
   "screenshots": [

@@ -101,7 +101,11 @@ class App {
 
   async renderPage() {
     const url = getActiveRoute();
-    const page = routes[url];
+    let page = routes[url];
+
+    if (!page) {
+      page = routes['*']; // NotFoundPage
+    }
 
     const renderContent = async () => {
       this.#content.classList.add("fade-out");
