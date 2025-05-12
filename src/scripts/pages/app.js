@@ -64,7 +64,6 @@ class App {
     const token = localStorage.getItem("authToken");
     if (!token) return;
 
-    const vapidPublicKey = "REPLACE_WITH_YOUR_VAPID_PUBLIC_KEY";
     const convertedVapidKey = this._urlBase64ToUint8Array(vapidPublicKey);
 
     try {

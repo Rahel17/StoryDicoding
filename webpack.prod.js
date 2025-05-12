@@ -29,6 +29,12 @@ module.exports = merge(common, {
       },
     ],
   },
+  output: {
+    chunkFormat: 'module',
+  },
+  experiments: {
+    outputModule: true,
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
