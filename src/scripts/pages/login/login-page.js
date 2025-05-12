@@ -1,0 +1,51 @@
+import LoginPresenter from "../../presenters/login-presenter.js";
+
+export default class LoginPage {
+  constructor() {
+    this.presenter = new LoginPresenter(this);
+  }
+
+  async render() {
+    return `
+      <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+      <main id="main-content">
+        <section class="auth-section auth-layout" tabindex="0" aria-label="Login Page" style="min-height: calc(100vh - 90px); display: flex;">
+          <div class="auth-right" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+            <form id="loginForm" class="auth-form-card" aria-labelledby="login-title" style="width: 100%; max-width: 400px; padding: 2rem; background-color: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+              <h1 id="login-title" style="font-size: 1.5rem; font-weight: 700; color: #504e76; margin-bottom: 1rem;">Login</h1>
+  
+              <label for="email" style="font-weight: bold; margin-bottom: 4px;">Email</label>
+              <input id="email" type="email" name="email" placeholder="Email Address" required style="padding: 10px; font-size: 1rem; width: 100%; border-radius: 6px; border: 1px solid #ccc; background-color: #f0f4ff; margin-bottom: 1rem;" />
+  
+              <label for="password" style="font-weight: bold; margin-bottom: 4px;">Password</label>
+              <input id="password" type="password" name="password" placeholder="Password" required style="padding: 10px; font-size: 1rem; width: 100%; border-radius: 6px; border: 1px solid #ccc; background-color: #f0f4ff; margin-bottom: 1.5rem;" />
+  
+              <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; background-color: #504e76; color: white; font-weight: bold; font-size: 1rem; border: none; border-radius: 6px; cursor: pointer;">Sign In</button>
+              <p class="alt-link" style="margin-top: 1rem; font-size: 0.9rem; text-align: center;">Don't have an account? <a href="#/register" style="color: #504e76; font-weight: 600;">Sign up</a></p>
+              <div id="login-message" role="alert" aria-live="polite" style="margin-top: 10px; color: red;"></div>
+            </form>
+          </div>
+        </section>
+      </main>
+    `;
+  }
+
+  async afterRender() {
+    if (localStorage.getItem("authToken")) {
+      window.location.hash = "/";
+      return;
+    }
+
+    const form = document.querySelector("#loginForm");
+    form.addEventListener("submit", (event) => this.presenter.login(event));
+  }
+
+  showError(message) {
+    const messageEl = document.getElementById("login-message");
+    messageEl.textContent = message;
+  }
+
+  loginSuccess() {
+    window.location.hash = "/";
+  }
+}

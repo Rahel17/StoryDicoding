@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>App</title>
+  </head>
+  <body>
+    <header>
+      <div class="main-header container">
+        <a class="skip-link" id="skip-link" role="link" tabindex="0">Lewati ke konten utama</a>
+        <a class="brand-name" href="#/">App</a>
+
+        <nav id="navigation-drawer" class="navigation-drawer">
+          <ul id="nav-list" class="nav-list">
+            <li id="nav-login"><a href="#/login">Login</a></li>
+            <li id="nav-register"><a href="#/register">Register</a></li>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/add-story">Add stories</a></li>
+            <li><a href="#/bookmark">Bookmarks</a></li>
+          </ul>
+        </nav>
+
+        <button id="drawer-button" class="drawer-button">☰</button>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content"></main>
+
+    <footer style="padding: 2rem; text-align: left">
+      <button id="footer-logout-btn" class="logout-button" style="display: none"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("authToken");
+        const navLogin = document.getElementById("nav-login");
+        const navRegister = document.getElementById("nav-register");
+        const footerLogoutBtn = document.getElementById("footer-logout-btn");
+
+        if (token) {
+          if (navLogin) navLogin.style.display = "none";
+          if (navRegister) navRegister.style.display = "none";
+          if (footerLogoutBtn) footerLogoutBtn.style.display = "inline-block";
+        }
+
+        footerLogoutBtn?.addEventListener("click", () => {
+          localStorage.removeItem("authToken");
+          localStorage.removeItem("authUserId");
+          localStorage.removeItem("authUserName");
+          window.location.hash = "/login";
+          location.reload();
+        });
+      });
+    </script>
+  </body>
+</html>
