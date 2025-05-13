@@ -1,3 +1,5 @@
+const vapidPublicKey = "BCx_or2spX4vjTh2ig0zwXGRBHBAl8IHeubteWFE62rDo_wFWfBUbcrpJQ7bbFP4_Ce80KzqbYL2bac1MJSQLIc";
+
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
 import { subscribeNotification } from "../data/api.js";
