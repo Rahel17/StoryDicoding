@@ -31,7 +31,7 @@ export default class BookmarkPage {
   container.innerHTML = reports
     .map((report) => `
       <article class="card shadow" style="max-width: 350px; border-radius: 10px; overflow: hidden; margin: 1rem;">
-        <img src="${report.photoUrl}" alt="Foto oleh ${report.name}" class="card-image" style="width: 100%; height: 200px; object-fit: cover;" />
+        <img src="${report.photoBase64 || report.photoUrl}" alt="Foto oleh ${report.name}" class="card-image" style="width: 100%; height: 200px; object-fit: cover;" />
         <div class="card-content" style="padding: 1rem;">
           <h3 style="margin-bottom: 0.5rem;">${report.name}</h3>
           <time style="display: block; color: #555;">${showFormattedDate(report.createdAt, "id-ID")}</time>

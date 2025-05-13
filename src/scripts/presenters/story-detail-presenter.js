@@ -38,6 +38,21 @@ export default class StoryDetailPresenter {
   async saveReport() {
     try {
       const report = await this.#apiModel.getStoryDetail(localStorage.getItem("authToken"), this.#storyId);
+
+      // Fetch the image and convert to base64
+      const response = await fetch(report.story.photoUrl);
+      const blob = await response.blob();
+      const reader = new FileReader();
+      const base64Promise = new Promise((resolve, reject) => {
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+      });
+      reader.readAsDataURL(blob);
+      const photoBase64 = await base64Promise;
+
+      // Add base64 image to report object
+      report.story.photoBase64 = photoBase64;
+
       await this.#dbModel.putReport(report.story);
       this.#view.saveToBookmarkSuccessfully('Berhasil menyimpan laporan.');
     } catch (error) {
